@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.17.131:3306/expense_tracker?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: yl
+    password: 123456
+  security:
+    user:
+      name: admin
+      password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# Swagger配置
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: Spring Boot 记账系统接口文档
+  try-host: http://localhost:${server.port}
+
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.example.expense_tracker: debug
+    org.springframework: info
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.example.expense_tracker.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+jwt:
+  secret: 6s1Xhrvaa49PPmEddK4tQ+p3VThWnFFdwdBUfVdQxwY=    # JWT签名的密钥，用于生成和验证token
+  expiration: 86400000       # token的有效期，这里设置为24小时（24 * 60 * 60 * 1000毫秒）
