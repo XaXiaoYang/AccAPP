@@ -249,3 +249,40 @@ CREATE TABLE budget (
 - [ ] 账单导入功能
 - [ ] 移动端适配
 - [ ] 多币种支持 仅支持rmb
+
+## GIT使用方法
+项目结构
+expense-tracker/
+├── .git/
+├── .gitignore
+├── pom.xml
+├── README.md
+└── src/
+├── main/
+│   ├── java/
+│   └── resources/
+└── test/
+# 进入项目根目录（确保是正确的项目目录）
+cd expense-tracker
+
+# 初始化 Git 仓库
+git init
+
+# 添加远程仓库
+git remote add origin https://github.com/your-username/expense-tracker.git
+
+# 创建并切换到主分支
+git checkout -b dev
+
+# 添加文件
+git add .
+
+# 检查状态
+git status
+
+# 提交更改
+git commit -m "Initial commit"
+
+# 推送到远程仓库
+git push -u origin dev
+ 
