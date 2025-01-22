@@ -19,4 +19,14 @@ public class User {
     private String email;
     private Date createdAt;
     private Date updatedAt;
+    private String currencyUnit;//货币单位
+
+    // Getter 和 Setter
+    public String getCurrencyUnit() {
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit) {
+        this.currencyUnit = currencyUnit;
+    }
 }

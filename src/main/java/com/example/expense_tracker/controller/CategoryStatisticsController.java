@@ -37,4 +37,40 @@ public class CategoryStatisticsController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @ApiOperation("获取支出分类数据")
+    @GetMapping("/expense-category")
+    public ResponseEntity<?> getExpenseCategoryData() {
+        try {
+            String token = jwtTokenProvider.resolveToken(request);
+            Long userId = jwtTokenProvider.getUserId(token);
+            log.info("success**获取支出分类数据");
+            return ResponseEntity.ok(transactionService.getExpenseCategoryData(userId));
+        } catch (Exception e) {
+            log.error("获取支出分类数据失败", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    /**
+     * // 示例代码：使用 ECharts 绘制支出分类饼图
+     * const chart = echarts.init(document.getElementById('categoryChart'));
+     * const option = {
+     *     title: { text: '支出分类' },
+     *     tooltip: { trigger: 'item' },
+     *     series: [
+     *         {
+     *             name: '支出分类',
+     *             type: 'pie',
+     *             radius: '50%',
+     *             data: [
+     *                 { value: 1048, name: '餐饮' },
+     *                 { value: 735, name: '交通' },
+     *                 { value: 580, name: '购物' },
+     *                 // ...
+     *             ]
+     *         }
+     *     ]
+     * };
+     * chart.setOption(option);
+     */
 }

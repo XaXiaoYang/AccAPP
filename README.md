@@ -139,67 +139,31 @@
   Authorization: Bearer {token}
   ```
 
-## 数据库设计
+##  添加以下功能来完善记账系统：
 
-### 用户表 (user)
-```sql
-CREATE TABLE user (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-### 分类表 (category)
-```sql
-CREATE TABLE category (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    type VARCHAR(20) NOT NULL,
-    user_id BIGINT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-### 交易表 (transaction)
-```sql
-CREATE TABLE transaction (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    type VARCHAR(20) NOT NULL,
-    category_id BIGINT NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    description VARCHAR(255),
-    transaction_date DATETIME NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-### 预算表 (budget)
-```sql
-CREATE TABLE budget (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    category_id BIGINT NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    year INT NOT NULL,
-    month INT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    UNIQUE KEY uk_user_category_year_month (user_id, category_id, year, month)
-);
-```
+    数据分析和可视化：
+        收支趋势图表（按月/季度/年）
+        支出分类饼图
+        收入来源分析
+        同比/环比分析
+    预算提醒功能：
+        预算使用率预警（如达到80%时提醒）
+        定期预算执行情况推送
+        超预算预警通知
+    账单管理增强：
+        批量导入交易记录（支持Excel导入）
+        定期账单功能（如每月固定支出）
+        账单标签功能（便于分类和查询）
+        账单图片附件（如发票照片）
+    个人设置功能：
+        货币单位设置
 
 ## 快速开始
 
 1. **环境要求**
     - JDK 1.8+
     - Maven 3.6+
-    - MySQL 5.7+
+    - MySQL 8.0+
 
 2. **配置数据库**
     - 创建数据库：`expense_tracker`
@@ -242,13 +206,6 @@ CREATE TABLE budget (
 
 4. 分类支持系统预设和用户自定义两种类型
 
-## 开发计划
-
-- [ ] 数据分析和可视化
-- [ ] 预算提醒功能
-- [ ] 账单导入功能
-- [ ] 移动端适配
-- [ ] 多币种支持 仅支持rmb
 
 ## GIT使用方法
 项目结构

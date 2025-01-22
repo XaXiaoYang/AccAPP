@@ -27,4 +27,5 @@ public class Category {
     private Date createdAt;
 
     private Date updatedAt;
+
 }

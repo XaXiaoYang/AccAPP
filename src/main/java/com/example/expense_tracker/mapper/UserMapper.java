@@ -3,6 +3,7 @@ package com.example.expense_tracker.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.expense_tracker.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author xiaoyang
@@ -11,4 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+    void updateCurrencyUnit(@Param("userId") Long userId, @Param("currencyUnit") String currencyUnit);
 }

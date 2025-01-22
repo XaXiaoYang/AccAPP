@@ -24,4 +24,5 @@ public interface BudgetService {
 
     // 删除预算
     void deleteBudget(Long userId, Long budgetId);
+
 }

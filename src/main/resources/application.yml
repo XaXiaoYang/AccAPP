@@ -17,6 +17,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+cors:
+  allowed:
+    origins: http://localhost:8081
+
 # Swagger配置
 swagger:
   enable: true

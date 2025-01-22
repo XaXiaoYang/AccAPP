@@ -34,4 +34,10 @@ public class Transaction {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private String is_recurring;
+
+    private String tags;
+
+    private String attachmentUrl;
 }

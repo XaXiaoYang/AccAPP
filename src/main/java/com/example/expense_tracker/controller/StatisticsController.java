@@ -50,4 +50,65 @@ public class StatisticsController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @ApiOperation("获取收支趋势数据")
+    @GetMapping("/trend")
+    public ResponseEntity<?> getIncomeExpenseTrend(
+            @RequestParam(required = false) String period) {
+        try {
+            String token = jwtTokenProvider.resolveToken(request);
+            Long userId = jwtTokenProvider.getUserId(token);
+            log.info("success**获取收支趋势数据");
+            return ResponseEntity.ok(transactionService.getIncomeExpenseTrend(userId, period));
+        } catch (Exception e) {
+            log.error("获取收支趋势数据失败", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    /**
+     * // 示例代码：使用 ECharts 绘制收支趋势图
+     * const chart = echarts.init(document.getElementById('trendChart'));
+     * const option = {
+     *     title: { text: '收支趋势' },
+     *     tooltip: { trigger: 'axis' },
+     *     xAxis: { type: 'category', data: ['Jan', 'Feb', 'Mar', ...] },
+     *     yAxis: { type: 'value' },
+     *     series: [
+     *         { name: '收入', type: 'line', data: [1200, 1500, 1800, ...] },
+     *         { name: '支出', type: 'line', data: [800, 900, 1000, ...] }
+     *     ]
+     * };
+     * chart.setOption(option);
+     */
+
+    @ApiOperation("获取收入来源数据")
+    @GetMapping("/income-source")
+    public ResponseEntity<?> getIncomeSourceData() {
+        try {
+            String token = jwtTokenProvider.resolveToken(request);
+            Long userId = jwtTokenProvider.getUserId(token);
+            log.info("success**获取收入来源数据");
+            return ResponseEntity.ok(transactionService.getIncomeSourceData(userId));
+        } catch (Exception e) {
+            log.error("获取收入来源数据失败", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @ApiOperation("获取同比/环比数据")
+    @GetMapping("/comparison")
+    public ResponseEntity<?> getComparisonData(
+            @RequestParam(required = false) String type) {
+        try {
+            String token = jwtTokenProvider.resolveToken(request);
+            Long userId = jwtTokenProvider.getUserId(token);
+            log.info("success**获取同比/环比数据");
+            return ResponseEntity.ok(transactionService.getComparisonData(userId, type));
+        } catch (Exception e) {
+            log.error("获取同比/环比数据失败", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

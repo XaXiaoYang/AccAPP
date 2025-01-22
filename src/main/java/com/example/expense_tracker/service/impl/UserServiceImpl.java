@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author xiaoyang
  * @create 2025-01-17-09:59
@@ -61,5 +63,15 @@ public class UserServiceImpl implements UserService {
 
         return jwtTokenProvider.createToken(user.getUsername(), user.getId());
 
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userMapper.selectList(new QueryWrapper<>());
+    }
+
+    @Override
+    public void updateCurrencyUnit(Long userId, String currencyUnit) {
+        userMapper.updateCurrencyUnit(userId, currencyUnit);
     }
 }
